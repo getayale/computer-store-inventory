@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory | Computer Store</title>
+</head>
+<body>
+  <h1>Computer Store Inventory</h1>
+  
+  <section>
+  <h2>Inventory Items</h2>
+
+  <p>Manage the products available in your store.</p>
+  <form action="/items" method="GET">
+  <label for="search">Search by name or SKU:</label>
+
+  <input
+    type="text"
+    id="search"
+    name="search"
+    placeholder="Enter item name or SKU"
+    value="<%= search %>"
+  >
+
+  <label for="category">Filter by category:</label>
+
+<select id="category" name="category">
+  <option value="">All Categories</option>
+
+  <% categories.forEach((category) => { %>
+    <option
+      value="<%= category.id %>"
+      <%= String(category.id) === categoryId ? "selected" : "" %>
+    >
+      <%= category.name %>
+    </option>
+  <% }) %>
+</select>
+
+  <button type="submit">Search</button>
+  <a href="/items">Clear</a>
+</form>
+  <a href="/items/new">+ Add Item</a>
+
+  <ul>
+    <% items.forEach((item)=>{ %>
+        <li>
+        <strong> <%=item.name%></strong>
+        - <%=item.price%>ETB 
+        
+        <a href="/items/<%= item.id %>">View Details</a>
+        <a href="/items/<%= item.id %>/edit">Edit</a>
+        <form action="/items/<%=item.id%>/delete" method="post" 
+            onsubmit="return confirm('Are you sure you want to delete this item?');">
+            <button type="submit">Delete</button>
+        </form>
+        </li>
+        <%})%>
+
+        <div>
+  <% if (page > 1) { %>
+    <a href="/items?search=<%= encodeURIComponent(search) %>&category=<%= encodeURIComponent(categoryId) %>&page=<%= page - 1 %>">
+      Previous
+    </a>
+  <% } %>
+
+  <span>Page <%= page %> of <%= totalPages %></span>
+
+  <% if (page < totalPages) { %>
+    <a href="/items?search=<%= encodeURIComponent(search) %>&category=<%= encodeURIComponent(categoryId) %>&page=<%= page + 1 %>">
+      Next
+    </a>
+  <% } %>
+</div>
+  </ul>
+</section>
+</body>
+</html>

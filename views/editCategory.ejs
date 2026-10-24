@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Category | Computer Store</title>
+</head>
+<body>
+  <h1>Edit Category</h1>
+
+  <form action="/categories/<%= category.id %>/edit" method="POST">
+
+    <label for="name">Category Name</label>
+<input
+  type="text"
+  id="name"
+  name="name"
+  value="<%= category.name %>"
+  required
+>
+
+<label for="description">Description</label>
+<textarea
+  id="description"
+  name="description"
+  rows="4"
+><%= category.description || "" %></textarea>
+
+<button type="submit">Save Changes</button>
+<a href="/categories">Cancel</a>
+
+</form>
+
+</body>
+</html>

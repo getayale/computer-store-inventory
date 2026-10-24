@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item | Computer Store</title>
+</head>
+<body>
+    <h1>Add New Item</h1>
+    <form action="/items/new" method="post">
+        <div>
+            <label for="name">Item Name:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea name="description" id="description"></textarea>
+        </div>
+
+        <div>
+            <label for="price">Price(ETB)</label>
+            <input type="number" name="price" id="price" min="1" step="0.02" required>
+        </div>
+        <div>
+            <label for="quantity">Quantity</label>
+            <input type="number" name="quantity" id="quantity" min="1" step="1">
+        </div>
+
+        <div>
+            <label for="sku">SKU</label>
+            <input type="text" name="sku" id="sku" required>
+        </div>
+        <div>
+            <label for="category_id">Category</label>
+            <select name="category_id" id="category_id" required>
+                <option value=""> Choose a Category</option>
+                <% categories.forEach((category)=>{%>
+                    <option value="<%= category.id%>">
+<%= category.name%>
+                    </option>
+                <%})%>
+
+            </select>
+        </div>
+<button type="submit">Add Item</button>
+    </form>
+    
+    <a href="/items">Back to Inventory</a>
+</body>
+</html>

@@ -1,15 +1,20 @@
-import Express  from "express";
+
+import express from "express";
 import { pool } from "./db/pool.js";
-const app=Express();
+import categoriesRouter from "./routes/categoriesRouter.js";
+import itemsRouter from "./routes/itemsRouter.js";
 
-app.get("/",(req,res)=>{
-res.send("Computer Store Inventory");
-});
+const app = express();
 
-app.listen(3001,()=>{
+app.set("view engine", "ejs");
 
-    console.log("Server running at http://localhost:3001");
+app.use(express.urlencoded({ extended: true }));
 
+app.use("/categories", categoriesRouter);
+app.use("/items", itemsRouter);
+
+app.get("/", (req, res) => {
+  res.send("Computer Store Inventory");
 });
 
 app.get("/db-test", async (req, res) => {
@@ -23,25 +28,18 @@ app.get("/db-test", async (req, res) => {
 });
 
 app.get("/db-info", async (req, res) => {
-  const result = await pool.query(
-    "SELECT current_database(), current_schema()"
-  );
+  try {
+    const result = await pool.query(
+      "SELECT current_database(), current_schema()"
+    );
 
-  res.json(result.rows[0]);
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Failed to retrieve database information.");
+  }
 });
 
-
-app.get("/categories",async (req,res)=>{
-
-    try{
-        const result=await pool.query("SELECT * FROM categories ORDER BY name");
-        res.json(result.rows);
-    }
-
-    catch(error){
-        console.error(error);
-        res.status(500).send("Failed to retrieve categories.");
-
-    }
-
+app.listen(3001, () => {
+  console.log("Server running at http://localhost:3001");
 });

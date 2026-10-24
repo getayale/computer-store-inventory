@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | Computer Store</title>
+</head>
+<body>
+    <h1>Computer Store Categories</h1>
+
+    <form action="/categories" method="GET">
+        <input
+            type="search"
+            name="search"
+            placeholder="Search categories by name..."
+            value="<%= search %>"
+        >
+        <button type="submit">Search</button>
+        <a href="/categories">Clear</a>
+    </form>
+
+    <a href="/categories/new">+ Add Category</a>
+
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
+    <% } %>
+
+    <ul>
+        <% categories.forEach(category => { %>
+            <li>
+                <h2><%= category.name %></h2>
+
+                <p><%= category.description || "No description available." %></p>
+
+                <a href="/categories/<%= category.id %>">View</a>
+                <a href="/categories/<%= category.id %>/edit">Edit</a>
+
+                <form
+                    action="/categories/<%= category.id %>/delete"
+                    method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this category?');"
+                >
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+
+    <div class="pagination">
+        <% if (page > 1) { %>
+            <a href="/categories?search=<%= encodeURIComponent(search) %>&page=<%= page - 1 %>">
+                Previous
+            </a>
+        <% } %>
+
+        <span>Page <%= page %> of <%= totalPages %></span>
+
+        <% if (page < totalPages) { %>
+            <a href="/categories?search=<%= encodeURIComponent(search) %>&page=<%= page + 1 %>">
+                Next
+            </a>
+        <% } %>
+    </div>
+</body>
+</html>

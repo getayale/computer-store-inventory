@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Detail | Computer Store</title>
+</head>
+<body>
+    <h1><%= item.name %></h1>
+    <section>
+        <h2>Product Information</h2>
+        <p>
+            <Strong> Description:</Strong>
+            <%= item.description%>
+        </p>
+        <p>
+            <Strong>Price:</Strong>
+            <%=item.price%> ETB
+        </p>
+        <P>
+            <strong>Quantity:</strong>
+            <%=item.quantity %>
+        </P>
+
+        <p>
+            <strong>SKU:</strong>
+            <%= item.sku%>
+        </p>
+
+        <p>
+            <strong>Category:</strong>
+            <%=item.category_name%>
+        </p>
+    </section>
+
+    <a href="/items">Back to Inventory</a>
+</body>
+</html>
