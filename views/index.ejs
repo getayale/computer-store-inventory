@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f4f7fb;
+      color: #1e293b;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 7%;
+      background-color: #172554;
+      color: white;
+    }
+
+    nav h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      background-color: #2563eb;
+    }
+
+    .nav-links a:hover {
+      background-color: #1d4ed8;
+    }
+
+    main {
+      width: 86%;
+      max-width: 1100px;
+      margin: 60px auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #64748b;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .feature {
+      background-color: white;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+    }
+
+    .feature h2 {
+      margin-top: 0;
+      color: #1d4ed8;
+    }
+
+    .feature p {
+      color: #64748b;
+      line-height: 1.7;
+    }
+
+    .feature a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #2563eb;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .feature a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #64748b;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        padding: 18px 5%;
+        align-items: flex-start;
+        gap: 15px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      .nav-links a {
+        text-align: center;
+        flex: 1;
+      }
+
+      main {
+        width: 90%;
+        margin: 35px auto;
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h2>Computer Store Inventory</h2>
+
+    <div class="nav-links">
+      <a href="/categories">Categories</a>
+      <a href="/items">Items</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <h1>Manage Your Computer Store</h1>
+
+      <p>
+        Organize your computer products, manage categories,
+        and keep your inventory information up to date
+        in one simple application.
+      </p>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <h2>Manage Categories</h2>
+
+        <p>
+          Create categories to organize products, view existing
+          categories, update their information, and delete
+          categories when they are no longer needed.
+        </p>
+
+        <a href="/categories">Go to Categories →</a>
+      </div>
+
+      <div class="feature">
+        <h2>Manage Items</h2>
+
+        <p>
+          Add computer products, view product details, update
+          item information, and remove products from your
+          inventory when necessary.
+        </p>
+
+        <a href="/items">Go to Items →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Computer Store Inventory &copy; <%= new Date().getFullYear() %>
+  </footer>
+</body>
+</html>

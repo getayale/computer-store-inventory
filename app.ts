@@ -14,7 +14,9 @@ app.use("/categories", categoriesRouter);
 app.use("/items", itemsRouter);
 
 app.get("/", (req, res) => {
-  res.send("Computer Store Inventory");
+ res.render("index", {
+  title: "Computer Store Inventory",
+});
 });
 
 app.get("/db-test", async (req, res) => {
