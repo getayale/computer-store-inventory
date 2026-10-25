@@ -3,22 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Category || Computer Store</title>
+    <title>New Category | Computer Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f3f6fb;
+            color: #1e293b;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        .form-card {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        }
+
+        .form-header {
+            margin-bottom: 2rem;
+        }
+
+        .form-header h1 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            margin-bottom: 0.6rem;
+        }
+
+        .form-header p {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        input,
+        textarea {
+            display: block;
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background-color: #ffffff;
+            color: #0f172a;
+            font: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input {
+            min-height: 48px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .form-help {
+            display: block;
+            margin-top: 0.5rem;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .form-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 2rem;
+        }
+
+        button,
+        .cancel-link {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 46px;
+            padding: 0.8rem 1.25rem;
+            border-radius: 8px;
+            font: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        button {
+            flex: 1;
+            border: none;
+            background-color: #2563eb;
+            color: #ffffff;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        button:active,
+        .cancel-link:active {
+            transform: translateY(1px);
+        }
+
+        .cancel-link {
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+            color: #475569;
+        }
+
+        .cancel-link:hover {
+            background-color: #f8fafc;
+        }
+
+        button:focus-visible,
+        .cancel-link:focus-visible,
+        .back-link:focus-visible {
+            outline: 3px solid #93c5fd;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                margin: 1rem auto;
+            }
+
+            .form-card {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+
+            .form-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            button,
+            .cancel-link {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Add New Category</h1>
-    <form action="/categories/new" method="post">
-        <div>
-            <label for="name">Category Name</label>
-            <input type="text" name="name" id="name" maxlength="50" required>
-        </div>
-        <div>
-            <label for="description">Description</label>
-            <textarea name="description" id="description" rows="4"></textarea>
-        </div>
-        <button type="submit">Create Category</button>
-    </form>
-    <a href="/categories">Back to Categories</a>
-    
+    <main class="container">
+     
+        <section class="form-card">
+            <header class="form-header">
+                <h1>Add New Category</h1>
+                <p>
+                    Create a category to organize your computer store products.
+                    Enter a name and an optional description below.
+                </p>
+            </header>
+
+            <form action="/categories/new" method="post">
+                <div class="form-group">
+                    <label for="name">Category Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        maxlength="50"
+                        placeholder="e.g. Laptops"
+                        autocomplete="off"
+                        required
+                    >
+                    <small class="form-help">
+                        Use a short, descriptive name (up to 50 characters).
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                        name="description"
+                        id="description"
+                        rows="4"
+                        placeholder="Describe the products in this category..."
+                    ></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit">Create Category</button>
+                    <a href="/categories" class="cancel-link">Cancel</a>
+                </div>
+            </form>
+        </section>
+    </main>
 </body>
 </html>
