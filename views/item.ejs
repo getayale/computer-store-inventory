@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Item Detail | Computer Store</title>
+
+    <style>
+        body{
+             font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f9;
+        color:#1f2937;
+        margin: 0;
+    padding: 2rem 5%;
+        }
+        h1{
+             font-size: 2rem;
+        font-weight:700;
+        margin-bottom: 24px;
+        color:#111827; 
+        }
+        section{
+             background-color: #ffffff;
+   padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.05);
+        }
+
+        .back-link {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-bottom: 1.5rem;
+    color: #2563eb;
+    font-size: 0.95rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+.back-link:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
+}
+    </style>
 </head>
 <body>
     <h1><%= item.name %></h1>
+        <a href="/items" class="back-link">Back to Inventory</a>
     <section>
         <h2>Product Information</h2>
         <p>
@@ -33,6 +77,6 @@
         </p>
     </section>
 
-    <a href="/items">Back to Inventory</a>
+
 </body>
 </html>

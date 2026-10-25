@@ -4,6 +4,216 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory | Computer Store</title>
+    <style>
+      body{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f4f6f9;
+        color:#1f2937;
+        margin: 0;
+        padding: 32px;
+
+      }
+      h1{
+        font-size: 2rem;
+        font-weight:700;
+        margin-bottom: 24px;
+        color:#111827;
+
+      }
+
+      section {
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+section h2 {
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+section p {
+    color: #6b7280;
+    margin-top: 0;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.filter-form label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.filter-form input,
+.filter-form select {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #1f2937;
+    font-size: 0.95rem;
+}
+
+.filter-form input {
+    width: 240px;
+}
+
+.filter-form select {
+    min-width: 180px;
+}
+
+.filter-form button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-form button:hover {
+    background-color: #1d4ed8;
+}
+.filter-form a {
+    color: #4b5563;
+    text-decoration: none;
+    padding: 10px 4px;
+}
+
+.filter-form a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+.add-item-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    background-color: #2563eb;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.add-item-btn:hover {
+    background-color: #1d4ed8;
+}
+
+.items-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.item-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.item-name {
+    font-size: 1.1rem;
+    color: #111827;
+    margin: 0 0 12px;
+}
+
+.item-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0 0 20px;
+}
+.action-link {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 6px 8px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.view-link {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+
+.edit-link {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.view-link:hover {
+    background-color: #bfdbfe;
+}
+
+.edit-link:hover {
+    background-color: #e5e7eb;
+}
+
+.delete-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #fecaca;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.page-link {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.page-link:hover {
+    background-color: #eff6ff;
+    border-color: #2563eb;
+}
+
+.pagination span {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+    </style>
 </head>
 <body>
   <h1>Computer Store Inventory</h1>
@@ -12,7 +222,7 @@
   <h2>Inventory Items</h2>
 
   <p>Manage the products available in your store.</p>
-  <form action="/items" method="GET">
+<form action="/items" method="GET" class="filter-form">
   <label for="search">Search by name or SKU:</label>
 
   <input
@@ -41,26 +251,29 @@
   <button type="submit">Search</button>
   <a href="/items">Clear</a>
 </form>
-  <a href="/items/new">+ Add Item</a>
+  <a href="/items/new" class="add-item-btn">+ Add Item</a>
 
-  <ul>
+  <ul class="items-grid">
     <% items.forEach((item)=>{ %>
-        <li>
-        <strong> <%=item.name%></strong>
-        - <%=item.price%>ETB 
+        <li class="item-card">
+        <h3 class="item-name"><%= item.name %></h3>
+     <p class="item-price"><%= item.price %> ETB</p>
         
-        <a href="/items/<%= item.id %>">View Details</a>
-        <a href="/items/<%= item.id %>/edit">Edit</a>
+        <a class="action-link view-link" href="/items/<%= item.id %>">View Details</a>
+<a class="action-link edit-link" href="/items/<%= item.id %>/edit">Edit</a>
         <form action="/items/<%=item.id%>/delete" method="post" 
             onsubmit="return confirm('Are you sure you want to delete this item?');">
-            <button type="submit">Delete</button>
+           <button class="delete-btn" type="submit">Delete</button>
         </form>
         </li>
         <%})%>
 
-        <div>
+     
+  </ul>
+</section>
+   <div class="pagination">
   <% if (page > 1) { %>
-    <a href="/items?search=<%= encodeURIComponent(search) %>&category=<%= encodeURIComponent(categoryId) %>&page=<%= page - 1 %>">
+    <a class="page-link" href="/items?search=<%= encodeURIComponent(search) %>&category=<%= encodeURIComponent(categoryId) %>&page=<%= page - 1 %>">
       Previous
     </a>
   <% } %>
@@ -68,12 +281,10 @@
   <span>Page <%= page %> of <%= totalPages %></span>
 
   <% if (page < totalPages) { %>
-    <a href="/items?search=<%= encodeURIComponent(search) %>&category=<%= encodeURIComponent(categoryId) %>&page=<%= page + 1 %>">
+    <a  class="page-link" href="/items?search=<%= encodeURIComponent(search) %>&category=<%= encodeURIComponent(categoryId) %>&page=<%= page + 1 %>">
       Next
     </a>
   <% } %>
 </div>
-  </ul>
-</section>
 </body>
 </html>
